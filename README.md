@@ -13,7 +13,13 @@ From the root directory, run `docker-compose up` to start a single node Cockroac
 docker-compose exec crdb /cockroach/cockroach sql --insecure --execute="CREATE DATABASE test;"
 ```
 
-2. Start the `LiquibaseDemoApplication` SpringBoot app.  This will read the Liquibase changelog file at startup and create the described tables.  See [db.changelog-master.yml](src/main/resources/db/changelog/db.changelog-master.yaml) for more details.  If it completes successfully you should see log file entries like this...
+2. Start the `LiquibaseDemoApplication` SpringBoot app.  
+
+```bash
+./mvnw spring-boot:run
+```
+
+This will read the Liquibase changelog file at startup and create the described tables.  See [db.changelog-master.yml](src/main/resources/db/changelog/db.changelog-master.yaml) for more details.  If it completes successfully you should see log file entries like this...
 
 ```
 2019-06-07 09:48:36.280  INFO 13434 --- [           main] liquibase.executor.jvm.JdbcExecutor      : SELECT COUNT(*) FROM public.databasechangeloglock
@@ -60,6 +66,9 @@ spring.liquibase.change-log=db/changelog/generated-tpcc.xml
 ```
 
 4. Restart the SpringBoot app.  You should now see the `tpcc` schema created in the `test` database.
+```bash
+./mvnw spring-boot:run
+```
 
 ## Helpful Commands
 
