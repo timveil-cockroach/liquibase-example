@@ -8,13 +8,11 @@ From the root directory, run `docker-compose up` to start a single node Cockroac
 
 ### Test 1
 1. Create the `test` database on the CockroachDB Docker instance
-
 ```bash
 docker-compose exec crdb /cockroach/cockroach sql --insecure --execute="CREATE DATABASE test;"
 ```
 
 2. Start the `LiquibaseDemoApplication` SpringBoot app.  
-
 ```bash
 ./mvnw spring-boot:run
 ```
@@ -50,7 +48,6 @@ This will read the Liquibase changelog file at startup and create the described 
 
 ### Test 2
 1. Use the CockroachDB `workload` command to generate the `tpcc` database and schema
-
 ```bash
 docker-compose exec crdb /cockroach/cockroach workload init tpcc
 ```
