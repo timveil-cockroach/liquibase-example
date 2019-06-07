@@ -1,0 +1,405 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="timveil (generated)" id="1559914427073-1">
+        <createTable tableName="customer">
+            <column name="c_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="c_d_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="c_w_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="c_first" type="TEXT"/>
+            <column name="c_middle" type="TEXT"/>
+            <column name="c_last" type="TEXT"/>
+            <column name="c_street_1" type="TEXT"/>
+            <column name="c_street_2" type="TEXT"/>
+            <column name="c_city" type="TEXT"/>
+            <column name="c_state" type="TEXT"/>
+            <column name="c_zip" type="TEXT"/>
+            <column name="c_phone" type="TEXT"/>
+            <column name="c_since" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="c_credit" type="TEXT"/>
+            <column name="c_credit_lim" type="numeric"/>
+            <column name="c_discount" type="numeric"/>
+            <column name="c_balance" type="numeric"/>
+            <column name="c_ytd_payment" type="numeric"/>
+            <column name="c_payment_cnt" type="BIGINT"/>
+            <column name="c_delivery_cnt" type="BIGINT"/>
+            <column name="c_data" type="TEXT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559914427073-2">
+        <createTable tableName="district">
+            <column name="d_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="d_w_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="d_name" type="TEXT"/>
+            <column name="d_street_1" type="TEXT"/>
+            <column name="d_street_2" type="TEXT"/>
+            <column name="d_city" type="TEXT"/>
+            <column name="d_state" type="TEXT"/>
+            <column name="d_zip" type="TEXT"/>
+            <column name="d_tax" type="numeric"/>
+            <column name="d_ytd" type="numeric"/>
+            <column name="d_next_o_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559914427073-3">
+        <createTable tableName="history">
+            <column defaultValueComputed="gen_random_uuid()" name="rowid" type="UUID">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="h_c_id" type="BIGINT"/>
+            <column name="h_c_d_id" type="BIGINT"/>
+            <column name="h_c_w_id" type="BIGINT"/>
+            <column name="h_d_id" type="BIGINT"/>
+            <column name="h_w_id" type="BIGINT"/>
+            <column name="h_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="h_amount" type="numeric"/>
+            <column name="h_data" type="TEXT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559914427073-4">
+        <createTable tableName="item">
+            <column name="i_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="i_im_id" type="BIGINT"/>
+            <column name="i_name" type="TEXT"/>
+            <column name="i_price" type="numeric"/>
+            <column name="i_data" type="TEXT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559914427073-5">
+        <createTable tableName="new_order">
+            <column name="no_o_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="no_d_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="no_w_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559914427073-6">
+        <createTable tableName="order">
+            <column name="o_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="o_d_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="o_w_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="o_c_id" type="BIGINT"/>
+            <column name="o_entry_d" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="o_carrier_id" type="BIGINT"/>
+            <column name="o_ol_cnt" type="BIGINT"/>
+            <column name="o_all_local" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559914427073-7">
+        <createTable tableName="order_line">
+            <column name="ol_o_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="ol_d_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="ol_w_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="ol_number" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="ol_i_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ol_supply_w_id" type="BIGINT"/>
+            <column name="ol_delivery_d" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="ol_quantity" type="BIGINT"/>
+            <column name="ol_amount" type="numeric"/>
+            <column name="ol_dist_info" type="TEXT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559914427073-8">
+        <createTable tableName="stock">
+            <column name="s_i_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="s_w_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="s_quantity" type="BIGINT"/>
+            <column name="s_dist_01" type="TEXT"/>
+            <column name="s_dist_02" type="TEXT"/>
+            <column name="s_dist_03" type="TEXT"/>
+            <column name="s_dist_04" type="TEXT"/>
+            <column name="s_dist_05" type="TEXT"/>
+            <column name="s_dist_06" type="TEXT"/>
+            <column name="s_dist_07" type="TEXT"/>
+            <column name="s_dist_08" type="TEXT"/>
+            <column name="s_dist_09" type="TEXT"/>
+            <column name="s_dist_10" type="TEXT"/>
+            <column name="s_ytd" type="BIGINT"/>
+            <column name="s_order_cnt" type="BIGINT"/>
+            <column name="s_remote_cnt" type="BIGINT"/>
+            <column name="s_data" type="TEXT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559914427073-9">
+        <createTable tableName="warehouse">
+            <column name="w_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="w_name" type="TEXT"/>
+            <column name="w_street_1" type="TEXT"/>
+            <column name="w_street_2" type="TEXT"/>
+            <column name="w_city" type="TEXT"/>
+            <column name="w_state" type="TEXT"/>
+            <column name="w_zip" type="TEXT"/>
+            <column name="w_tax" type="numeric"/>
+            <column name="w_ytd" type="numeric"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559914427073-10">
+        <addUniqueConstraint columnNames="o_w_id, o_d_id, o_carrier_id, o_id" constraintName="order_idx" tableName="order"/>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559914427073-11">
+        <addForeignKeyConstraint baseColumnNames="c_w_id,c_d_id" baseTableName="customer" constraintName="fk_c_w_id_ref_district" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="d_w_id,d_id" referencedTableName="district" validate="true"/>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559914427073-12">
+        <addForeignKeyConstraint baseColumnNames="d_w_id" baseTableName="district" constraintName="fk_d_w_id_ref_warehouse" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="w_id" referencedTableName="warehouse" validate="true"/>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559914427073-13">
+        <addForeignKeyConstraint baseColumnNames="h_c_w_id,h_c_d_id,h_c_id" baseTableName="history" constraintName="fk_h_c_w_id_ref_customer" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="c_w_id,c_d_id,c_id" referencedTableName="customer" validate="true"/>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559914427073-14">
+        <addForeignKeyConstraint baseColumnNames="h_w_id,h_d_id" baseTableName="history" constraintName="fk_h_w_id_ref_district" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="d_w_id,d_id" referencedTableName="district" validate="true"/>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559914427073-15">
+        <addForeignKeyConstraint baseColumnNames="o_w_id,o_d_id,o_c_id" baseTableName="order" constraintName="fk_o_w_id_ref_customer" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="c_w_id,c_d_id,c_id" referencedTableName="customer" validate="true"/>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559914427073-16">
+        <addForeignKeyConstraint baseColumnNames="ol_supply_w_id,ol_i_id" baseTableName="order_line" constraintName="fk_ol_supply_w_id_ref_stock" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="s_w_id,s_i_id" referencedTableName="stock" validate="true"/>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559914427073-17">
+        <addForeignKeyConstraint baseColumnNames="ol_w_id,ol_d_id,ol_o_id" baseTableName="order_line" constraintName="fk_ol_w_id_ref_order" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="o_w_id,o_d_id,o_id" referencedTableName="order" validate="true"/>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559914427073-18">
+        <addForeignKeyConstraint baseColumnNames="s_i_id" baseTableName="stock" constraintName="fk_s_i_id_ref_item" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="i_id" referencedTableName="item" validate="true"/>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559914427073-19">
+        <addForeignKeyConstraint baseColumnNames="s_w_id" baseTableName="stock" constraintName="fk_s_w_id_ref_warehouse" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="w_id" referencedTableName="warehouse" validate="true"/>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559915668334-1">
+        <createTable tableName="customer">
+            <column name="c_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="c_d_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="c_w_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="c_first" type="TEXT"/>
+            <column name="c_middle" type="TEXT"/>
+            <column name="c_last" type="TEXT"/>
+            <column name="c_street_1" type="TEXT"/>
+            <column name="c_street_2" type="TEXT"/>
+            <column name="c_city" type="TEXT"/>
+            <column name="c_state" type="TEXT"/>
+            <column name="c_zip" type="TEXT"/>
+            <column name="c_phone" type="TEXT"/>
+            <column name="c_since" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="c_credit" type="TEXT"/>
+            <column name="c_credit_lim" type="numeric"/>
+            <column name="c_discount" type="numeric"/>
+            <column name="c_balance" type="numeric"/>
+            <column name="c_ytd_payment" type="numeric"/>
+            <column name="c_payment_cnt" type="BIGINT"/>
+            <column name="c_delivery_cnt" type="BIGINT"/>
+            <column name="c_data" type="TEXT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559915668334-2">
+        <createTable tableName="district">
+            <column name="d_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="d_w_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="d_name" type="TEXT"/>
+            <column name="d_street_1" type="TEXT"/>
+            <column name="d_street_2" type="TEXT"/>
+            <column name="d_city" type="TEXT"/>
+            <column name="d_state" type="TEXT"/>
+            <column name="d_zip" type="TEXT"/>
+            <column name="d_tax" type="numeric"/>
+            <column name="d_ytd" type="numeric"/>
+            <column name="d_next_o_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559915668334-3">
+        <createTable tableName="history">
+            <column defaultValueComputed="gen_random_uuid()" name="rowid" type="UUID">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="h_c_id" type="BIGINT"/>
+            <column name="h_c_d_id" type="BIGINT"/>
+            <column name="h_c_w_id" type="BIGINT"/>
+            <column name="h_d_id" type="BIGINT"/>
+            <column name="h_w_id" type="BIGINT"/>
+            <column name="h_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="h_amount" type="numeric"/>
+            <column name="h_data" type="TEXT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559915668334-4">
+        <createTable tableName="item">
+            <column name="i_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="i_im_id" type="BIGINT"/>
+            <column name="i_name" type="TEXT"/>
+            <column name="i_price" type="numeric"/>
+            <column name="i_data" type="TEXT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559915668334-5">
+        <createTable tableName="new_order">
+            <column name="no_o_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="no_d_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="no_w_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559915668334-6">
+        <createTable tableName="order">
+            <column name="o_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="o_d_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="o_w_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="o_c_id" type="BIGINT"/>
+            <column name="o_entry_d" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="o_carrier_id" type="BIGINT"/>
+            <column name="o_ol_cnt" type="BIGINT"/>
+            <column name="o_all_local" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559915668334-7">
+        <createTable tableName="order_line">
+            <column name="ol_o_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="ol_d_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="ol_w_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="ol_number" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="ol_i_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ol_supply_w_id" type="BIGINT"/>
+            <column name="ol_delivery_d" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="ol_quantity" type="BIGINT"/>
+            <column name="ol_amount" type="numeric"/>
+            <column name="ol_dist_info" type="TEXT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559915668334-8">
+        <createTable tableName="stock">
+            <column name="s_i_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="s_w_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="s_quantity" type="BIGINT"/>
+            <column name="s_dist_01" type="TEXT"/>
+            <column name="s_dist_02" type="TEXT"/>
+            <column name="s_dist_03" type="TEXT"/>
+            <column name="s_dist_04" type="TEXT"/>
+            <column name="s_dist_05" type="TEXT"/>
+            <column name="s_dist_06" type="TEXT"/>
+            <column name="s_dist_07" type="TEXT"/>
+            <column name="s_dist_08" type="TEXT"/>
+            <column name="s_dist_09" type="TEXT"/>
+            <column name="s_dist_10" type="TEXT"/>
+            <column name="s_ytd" type="BIGINT"/>
+            <column name="s_order_cnt" type="BIGINT"/>
+            <column name="s_remote_cnt" type="BIGINT"/>
+            <column name="s_data" type="TEXT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559915668334-9">
+        <createTable tableName="warehouse">
+            <column name="w_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="primary"/>
+            </column>
+            <column name="w_name" type="TEXT"/>
+            <column name="w_street_1" type="TEXT"/>
+            <column name="w_street_2" type="TEXT"/>
+            <column name="w_city" type="TEXT"/>
+            <column name="w_state" type="TEXT"/>
+            <column name="w_zip" type="TEXT"/>
+            <column name="w_tax" type="numeric"/>
+            <column name="w_ytd" type="numeric"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559915668334-10">
+        <addUniqueConstraint columnNames="o_w_id, o_d_id, o_carrier_id, o_id" constraintName="order_idx" tableName="order"/>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559915668334-11">
+        <addForeignKeyConstraint baseColumnNames="c_w_id,c_d_id" baseTableName="customer" constraintName="fk_c_w_id_ref_district" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="d_w_id,d_id" referencedTableName="district" validate="true"/>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559915668334-12">
+        <addForeignKeyConstraint baseColumnNames="d_w_id" baseTableName="district" constraintName="fk_d_w_id_ref_warehouse" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="w_id" referencedTableName="warehouse" validate="true"/>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559915668334-13">
+        <addForeignKeyConstraint baseColumnNames="h_c_w_id,h_c_d_id,h_c_id" baseTableName="history" constraintName="fk_h_c_w_id_ref_customer" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="c_w_id,c_d_id,c_id" referencedTableName="customer" validate="true"/>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559915668334-14">
+        <addForeignKeyConstraint baseColumnNames="h_w_id,h_d_id" baseTableName="history" constraintName="fk_h_w_id_ref_district" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="d_w_id,d_id" referencedTableName="district" validate="true"/>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559915668334-15">
+        <addForeignKeyConstraint baseColumnNames="o_w_id,o_d_id,o_c_id" baseTableName="order" constraintName="fk_o_w_id_ref_customer" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="c_w_id,c_d_id,c_id" referencedTableName="customer" validate="true"/>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559915668334-16">
+        <addForeignKeyConstraint baseColumnNames="ol_supply_w_id,ol_i_id" baseTableName="order_line" constraintName="fk_ol_supply_w_id_ref_stock" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="s_w_id,s_i_id" referencedTableName="stock" validate="true"/>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559915668334-17">
+        <addForeignKeyConstraint baseColumnNames="ol_w_id,ol_d_id,ol_o_id" baseTableName="order_line" constraintName="fk_ol_w_id_ref_order" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="o_w_id,o_d_id,o_id" referencedTableName="order" validate="true"/>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559915668334-18">
+        <addForeignKeyConstraint baseColumnNames="s_i_id" baseTableName="stock" constraintName="fk_s_i_id_ref_item" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="i_id" referencedTableName="item" validate="true"/>
+    </changeSet>
+    <changeSet author="timveil (generated)" id="1559915668334-19">
+        <addForeignKeyConstraint baseColumnNames="s_w_id" baseTableName="stock" constraintName="fk_s_w_id_ref_warehouse" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="w_id" referencedTableName="warehouse" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
