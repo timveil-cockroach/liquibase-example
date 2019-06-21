@@ -61,6 +61,8 @@
                 <configuration>
                     <propertyFile>src/main/resources/liquibase.properties</propertyFile>
                     <outputChangeLogFile>src/main/resources/db/changelog/generated-tpcc.xml</outputChangeLogFile>
+                    <logging>DEBUG</logging>
+                    <verbose>true</verbose>
                 </configuration>
             </plugin>
         </plugins>
