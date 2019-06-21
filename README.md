@@ -2,7 +2,7 @@
 A quick example/test using SpringBoot, Liquibase and CockroachDB.
 
 ## Getting Started
-From the root directory, run `docker-compose up` to start a single node CockroachDB instance.  See [docker-compose.yml](docker-compose.yml) for more details.
+From the root directory, run `docker-compose up -d` to start a single node CockroachDB instance.  See [docker-compose.yml](docker-compose.yml) for more details.
 
 ## Tests
 
@@ -14,7 +14,7 @@ docker-compose exec crdb /cockroach/cockroach sql --insecure --execute="CREATE D
 
 2. Start the `LiquibaseDemoApplication` SpringBoot app.  
 ```bash
-./mvnw spring-boot:run
+./mvnw spring-boot:run -Dspring-boot.run.profiles=test1
 ```
 
 This will read the Liquibase changelog file at startup and create the described tables.  See [db.changelog-master.yml](src/main/resources/db/changelog/db.changelog-master.yaml) for more details.  If it completes successfully you should see log file entries like this...
@@ -57,14 +57,14 @@ docker-compose exec crdb /cockroach/cockroach workload init tpcc
 ./mvnw liquibase:generateChangeLog
 ```
 
-3. Ensure that `spring.liquibase.change-log` in `application.properties` now points to the newly generated change log.
+3. Ensure that `spring.liquibase.change-log` in `application-test2.properties` points to the newly generated change log.
 ```properties
 spring.liquibase.change-log=db/changelog/generated-tpcc.xml
 ```
 
 4. Restart the SpringBoot app.  You should now see the `tpcc` schema created in the `test` database.
 ```bash
-./mvnw spring-boot:run
+./mvnw spring-boot:run -Dspring-boot.run.profiles=test2
 ```
 
 ## Helpful Commands
