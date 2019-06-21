@@ -52,7 +52,7 @@ This will read the Liquibase changelog file at startup and create the described 
 docker-compose exec crdb /cockroach/cockroach workload init tpcc
 ```
 
-2. Run `liquibase:generateChangeLog` to generate a Liquibase changelog for the `tpcc` database.  This will generate a file called [generated-tpcc.xml](src/main/resources/db/changelog/generated-tpcc.xml)
+2. Run `liquibase:generateChangeLog` to generate a Liquibase changelog for the `tpcc` database.  This will generate a file called `src/main/resources/db/changelog/generated-tpcc.xml`
 ```bash
 ./mvnw liquibase:generateChangeLog
 ```
