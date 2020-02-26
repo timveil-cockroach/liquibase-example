@@ -1,18 +1,19 @@
 # CockroachDB + Liquibase Example
 A quick example/test using SpringBoot, Liquibase and CockroachDB.
 
-## Getting Started
-From the root directory, run `docker-compose up -d` to start a single node CockroachDB instance.  See [docker-compose.yml](docker-compose.yml) for more details.
-
 ## Tests
 
 ### Test 1
-1. Start the `LiquibaseDemoApplication` SpringBoot app.  
+Test creates a simple schema from an existing changelog file.
+
+1. From the root directory, run `docker-compose up -d` to start a single node CockroachDB instance.  See [docker-compose.yml](docker-compose.yml) for more details.
+
+2. Start the `LiquibaseDemoApplication` SpringBoot app.  
     ```bash
     ./mvnw spring-boot:run -Dspring-boot.run.profiles=test1
     ```
 
-This will read the Liquibase changelog file at startup and create the described tables.  See [db.changelog-master.yml](src/main/resources/db/changelog/db.changelog-master.yaml) for more details.  If it completes successfully you should see log file entries like this...
+    This will read the Liquibase changelog file at startup and create the described tables.  See [db.changelog-master.yml](src/main/resources/db/changelog/db.changelog-master.yaml) for more details.  If it completes successfully you should see log file entries like this...
 
     ```
     2019-06-07 09:48:36.280  INFO 13434 --- [           main] liquibase.executor.jvm.JdbcExecutor      : SELECT COUNT(*) FROM public.databasechangeloglock
@@ -40,8 +41,15 @@ This will read the Liquibase changelog file at startup and create the described 
     2019-06-07 09:48:37.073  INFO 13434 --- [           main] l.lockservice.StandardLockService        : Successfully released change log lock
     2019-06-07 09:48:37.129  INFO 13434 --- [           main] i.c.liquibase.LiquibaseDemoApplication   : Started LiquibaseDemoApplication in 2.129 seconds (JVM running for 2.525)
     ```
+3. Open [CockroachDB UI](http://localhost:8080/#/databases/tables) and verify that the table `person` has been created and data exists
+
+4. Bring down the CockroachDB cluster to clean up resources using `docker-compose down --remove-orphans --volumes`
 
 ### Test 2
+Test uses CockroachDB to generate a complex schema, generates a Liquibase `changelog` for the schema and then applies to a different database.
+
+1. From the root directory, run `docker-compose up -d` to start a single node CockroachDB instance.  See [docker-compose.yml](docker-compose.yml) for more details.
+
 1. Use the CockroachDB `workload` command to generate the `tpcc` database and schema
     ```bash
     docker-compose exec crdb /cockroach/cockroach workload init tpcc
