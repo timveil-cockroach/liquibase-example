@@ -10,3 +10,13 @@ services:
     ports:
       - "26257:26257"
       - "8080:8080"
+  chop-db-init:
+    container_name: chop-db-init
+    hostname: chop-db-init
+    image: timveil/cockroachdb-remote-client:latest
+    environment:
+      - COCKROACH_HOST=crdb:26257
+      - COCKROACH_INSECURE=true
+      - DATABASE_NAME=test
+    depends_on:
+      - crdb

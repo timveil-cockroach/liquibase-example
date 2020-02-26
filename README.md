@@ -7,12 +7,7 @@ From the root directory, run `docker-compose up -d` to start a single node Cockr
 ## Tests
 
 ### Test 1
-1. Create the `test` database on the CockroachDB Docker instance
-```bash
-docker-compose exec crdb /cockroach/cockroach sql --insecure --execute="CREATE DATABASE test;"
-```
-
-2. Start the `LiquibaseDemoApplication` SpringBoot app.  
+1. Start the `LiquibaseDemoApplication` SpringBoot app.  
 ```bash
 ./mvnw spring-boot:run -Dspring-boot.run.profiles=test1
 ```
