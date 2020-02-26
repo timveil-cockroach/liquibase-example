@@ -50,25 +50,28 @@ Test uses CockroachDB to generate a complex schema, generates a Liquibase `chang
 
 1. From the root directory, run `docker-compose up -d` to start a single node CockroachDB instance.  See [docker-compose.yml](docker-compose.yml) for more details.
 
-1. Use the CockroachDB `workload` command to generate the `tpcc` database and schema
+2. Use the CockroachDB `workload` command to generate the `tpcc` database and schema
     ```bash
     docker-compose exec crdb /cockroach/cockroach workload init tpcc
     ```
 
-2. Run `liquibase:generateChangeLog` to generate a Liquibase changelog for the `tpcc` database.  This will generate a file called `generated-tpcc.xml` in `src/main/resources/db/changelog/`.
+3. Run `liquibase:generateChangeLog` to generate a Liquibase changelog for the `tpcc` database.  This will generate a file called `generated-tpcc.xml` in `src/main/resources/db/changelog/`.
     ```bash
-    ./mvnw liquibase:generateChangeLog
+    ./mvnw clean liquibase:generateChangeLog
     ```
 
-3. Ensure that `spring.liquibase.change-log` in `application-test2.properties` points to the newly generated change log.
+4. Ensure that `spring.liquibase.change-log` in `application-test2.properties` points to the newly generated change log.
     ```properties
     spring.liquibase.change-log=db/changelog/generated-tpcc.xml
     ```
 
-4. Restart the SpringBoot app.  You should now see the `tpcc` schema created in the `test` database.
+5. Restart the SpringBoot app.  You should now see the `tpcc` schema created in the `test` database [here](http://localhost:8080/#/databases/tables).
     ```bash
     ./mvnw spring-boot:run -Dspring-boot.run.profiles=test2
     ```
+   
+6. Bring down the CockroachDB cluster to clean up resources using `docker-compose down --remove-orphans --volumes`
+
 
 ## Helpful Commands
 
