@@ -16,7 +16,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <liquibase.version>4.3.4</liquibase.version>
+        <liquibase.version>4.3.5</liquibase.version>
         <skipTests>true</skipTests>
     </properties>
 
