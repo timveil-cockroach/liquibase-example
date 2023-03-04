@@ -16,7 +16,7 @@
 
     <properties>
         <java.version>19</java.version>
-        <liquibase.version>4.19.0</liquibase.version>
+        <liquibase.version>4.19.1</liquibase.version>
         <skipTests>true</skipTests>
     </properties>
 
